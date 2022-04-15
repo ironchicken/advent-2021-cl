@@ -15,5 +15,10 @@
  "Count of number of depth increases is correct"
  (is (= 7 (sonar-sweep::answer1 test-input))))
 
+(test
+ depth-increases-with-window
+ "Count of number of depth increases with sliding window is correct"
+ (is (= 5 (sonar-sweep::answer2 test-input))))
+
 (defun run-tests ()
   (run! 'sonar-sweep-tests))

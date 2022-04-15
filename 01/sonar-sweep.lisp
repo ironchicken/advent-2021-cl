@@ -13,3 +13,12 @@
    (loop for y in input
 	 for x in (cdr input)
 	 when (> x y) collect x)))
+
+(defun answer2 (input)
+  (let ((window-sums (loop for z in input
+			   for y in (cdr input)
+			   for x in (cddr input)
+			   collect (+ x y z))))
+    (length (loop for y in window-sums
+		  for x in (cdr window-sums)
+		  when (> x y) collect x))))
