@@ -32,10 +32,10 @@ forward 2")
 (test
     follow-commands-is-correct
   "Commands can be correctly followed"
-  (let ((location (dive::make-location :horizontal 0 :vertical 0)))
+  (let ((location (dive::make-location :horizontal 0 :vertical 0 :aim 0)))
     (dive::follow-commands location test-commands)
     (is (and (= (dive::location-horizontal location) 15)
-	     (= (dive::location-vertical location) 10)))))
+	     (= (dive::location-vertical location) 60)))))
 
 (defun run-tests ()
   (run! 'dive-tests))

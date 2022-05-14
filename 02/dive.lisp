@@ -9,7 +9,8 @@
 
 (defstruct location
   horizontal
-  vertical)
+  vertical
+  aim)
 
 (defparameter *directions* '("forward" "down" "up"))
 
@@ -29,14 +30,17 @@
 (defun follow-commands (location commands)
   (dolist (cmd commands)
     (cond ((string= (command-direction cmd) "forward")
-	   (incf (location-horizontal location) (command-magnitude cmd)))
+	   (progn
+	     (incf (location-horizontal location) (command-magnitude cmd))
+	     (incf (location-vertical location)
+		   (* (location-aim location) (command-magnitude cmd)))))
 	  ((string= (command-direction cmd) "up")
-	   (decf (location-vertical location) (command-magnitude cmd)))
+	   (decf (location-aim location) (command-magnitude cmd)))
 	  ((string= (command-direction cmd) "down")
-	   (incf (location-vertical location) (command-magnitude cmd))))))
+	   (incf (location-aim location) (command-magnitude cmd))))))
 
 (defun answer1 (commands)
-  (let ((location (make-location :horizontal 0 :vertical 0)))
+  (let ((location (make-location :horizontal 0 :vertical 0 :aim 0)))
     (follow-commands location commands)
     (* (location-horizontal location) (location-vertical location))))
 
